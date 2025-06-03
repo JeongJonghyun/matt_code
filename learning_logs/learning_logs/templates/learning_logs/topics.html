@@ -1,0 +1,75 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block content %}
+<style>
+    .welcome-title {
+        font-size: 2em;
+        color: #2c3e50;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .welcome-msg {
+        text-align: center;
+        color: #4a6274;
+        margin-bottom: 30px;
+        font-size: 1.1em;
+    }
+    .topics-list {
+        max-width: 500px;
+        margin: 0 auto 30px auto;
+        padding: 0;
+        list-style: none;
+    }
+    .topics-list li {
+        background: #f4f8fb;
+        margin-bottom: 15px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 1px 1px 5px #e0e0e0;
+        font-size: 1.1em;
+        transition: background 0.2s;
+    }
+    .topics-list li:hover {
+        background: #e3eef7;
+    }
+    .add-topic-link {
+        display: block;
+        width: 180px;
+        margin: 30px auto 0 auto;
+        padding: 10px 0;
+        background: #2980b9;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.2s;
+    }
+    .add-topic-link:hover {
+        background: #1c5d8c;
+    }
+</style>
+
+<div class="welcome-title">Jeong Jong Hyun 홈페이지</div>
+<div class="welcome-msg">
+    홈페이지에 오신 것을 환영합니다!<br>
+    아래는 인사글 입니다.
+</div>
+<ul class="topics-list">
+    <li>
+        <a href="{% url 'learning_logs:about_me' %}">소개 합니다. Jeong Jong Hyun 입니다. </a>
+    </li>
+    {% for topic in topics %}
+        <li>
+            <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic.text }}</a>
+        </li>
+    {% empty %}
+        <li>
+            <a href="{% url 'learning_logs:interest_me' %}">관심분야</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'learning_logs:new_topic' %}" class="add-topic-link">새 주제 추가</a>
+{% endblock content %}
